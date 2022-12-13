@@ -12,6 +12,7 @@ public class Scanner {
 	
 	private ArrayList<Symboles> motsCles;
 	
+	
 	public static final int EOF='\0';
 
 	public char getCarCour() {
@@ -53,6 +54,8 @@ public class Scanner {
 		this.fluxSour=new FileReader(file);
 		this.motsCles=new ArrayList<Symboles>();	
 	}
+
+	
 	
 	public void initMotsCles() {
 		motsCles.add(new Symboles(Tokens.PROGRAM_TOKEN, "program"));
@@ -68,6 +71,11 @@ public class Scanner {
 		motsCles.add(new Symboles(Tokens.READ_TOKEN, "read"));
 	}
 	
+	
+	
+	
+	
+	
 	public void codageLex() {
 		String nom1=symbCour.getNom();
 		for(Symboles symb:motsCles) {
@@ -80,12 +88,21 @@ public class Scanner {
 		symbCour.setToken(Tokens.ID_TOKEN);
 	}
 	
+	
+	
+	
+	
+	
 	public void lireCar() throws IOException {
 		if (fluxSour.ready())
 			carCour=(char)fluxSour.read();
 		else
 			carCour=EOF;
 	}
+	
+	
+	
+	
 	
 	public void lireMot() throws IOException {
 		symbCour.setNom(symbCour.getNom()+carCour);
@@ -97,6 +114,9 @@ public class Scanner {
 		codageLex();
 	}
 	
+	
+	
+	
 	public void lireNombre() throws IOException {
 		symbCour.setNom(symbCour.getNom()+carCour);
 		lireCar();
@@ -107,10 +127,14 @@ public class Scanner {
 		symbCour.setToken(Tokens.NUM_TOKEN);
 	}
 	
+	
+	
+	
 	public void symbSuiv() throws IOException, ErreurCompilation {
 		symbCour=new Symboles();
 		while(Character.isWhitespace(carCour))
 			lireCar();
+		
 		if (Character.isLetter(carCour)) {
 			lireMot();
 			return;
@@ -119,6 +143,8 @@ public class Scanner {
 			lireNombre();
 			return;
 		}
+		
+		
 		switch(carCour) {
 		case '+':
 			symbCour.setToken(Tokens.PLUS_TOKEN);
@@ -211,6 +237,7 @@ public class Scanner {
 	}
 	
 	public static void main(String args[]) throws IOException, ErreurCompilation {
+		
 		Scanner scanner=new Scanner("C:\\Users\\PC\\Desktop\\emsi 4iir 1\\Compilation\\TP\\coo.txt");
 		scanner.initMotsCles();
 		scanner.lireCar();

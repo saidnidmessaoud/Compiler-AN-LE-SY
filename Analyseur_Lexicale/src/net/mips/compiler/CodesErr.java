@@ -4,6 +4,11 @@ public enum CodesErr {
 	CAR_INC_ERR("Symbole inconnu"),
 	FIC_VID_ERR("Erreur d'ouverture de fichier"),
 	
+	
+	
+	
+	
+	
 	PROGRAM_ERR("Mot clé program attendu !"),
 	ID_ERR("Identificateur attendu !"),
 	PVIR_ERR("Symbole ; attendu !"),
@@ -33,7 +38,12 @@ public enum CodesErr {
 	PARG_ERR("Symbole ( attendu !"),
 	PARD_ERR("Symbole ) attendu !"),
 	PNT_ERR("Symbole . attendu !"),
-	EOF_ERR("Symbole EOF attendu !");
+	EOF_ERR("Symbole EOF attendu !"),
+	
+	ID_NON_DECLARE_ERR("identificateur non déclaré"),
+	DOUBLE_DECLARATION_ERR("double déclaration"),
+	change_valeur_const("constant ne peut change de valeur"),
+	Nom_PROGRAM_ERR("nom de programme non autorisé");
 	
 	
 	private String message;

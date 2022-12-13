@@ -18,9 +18,11 @@ public class Parser {
 	public Parser(String nomFile) throws IOException,ErreurCompilation{
 		this.scanner = new Scanner(nomFile);
 	}
+
 	
-	public void testAccept(Tokens T,CodesErr C) throws IOException,ErreurCompilation{
+	public void testAccept(Tokens T,CodesErr C) throws IOException,ErreurCompilation{		
 		if(scanner.getSymbCour().getToken()==T) {
+			System.out.println(scanner.getSymbCour().getToken());
 			scanner.symbSuiv();
 			
 		}
@@ -37,7 +39,7 @@ public class Parser {
 		testAccept(Tokens.NUM_TOKEN,CodesErr.NUM_ERR);
 		testAccept(Tokens.PVIR_TOKEN,CodesErr.PVIR_ERR);
 		while(scanner.getSymbCour().getToken()==Tokens.ID_TOKEN) {
-			testAccept(Tokens.ID_TOKEN,CodesErr.ID_ERR);
+			scanner.symbSuiv();
 			testAccept(Tokens.EG_TOKEN,CodesErr.EG_ERR);
 			testAccept(Tokens.NUM_TOKEN,CodesErr.NUM_ERR);
 			testAccept(Tokens.PVIR_TOKEN,CodesErr.PVIR_ERR);	
@@ -49,7 +51,7 @@ public class Parser {
 		testAccept(Tokens.VAR_TOKEN, CodesErr.VAR_ERR);
 		testAccept(Tokens.ID_TOKEN,CodesErr.ID_ERR);
 		while(scanner.getSymbCour().getToken()==Tokens.VIR_TOKEN) {
-			testAccept(Tokens.VIR_TOKEN,CodesErr.VIR_ERR);
+			scanner.symbSuiv();
 			testAccept(Tokens.ID_TOKEN,CodesErr.ID_ERR);	
 		}
 		testAccept(Tokens.PVIR_TOKEN,CodesErr.PVIR_ERR);
@@ -80,10 +82,10 @@ public class Parser {
 	}
 	
 	public void Term() throws IOException,ErreurCompilation{
-		Fact();
+		this.Fact();
 		while (scanner.getSymbCour().getToken()==Tokens.MUL_TOKEN || scanner.getSymbCour().getToken()==Tokens.DIV_TOKEN ) {
 			Mulop();
-			Fact();
+			this.Fact();
 		}
 	}
 	
@@ -177,7 +179,7 @@ public class Parser {
 	
 	public void inst() throws IOException,ErreurCompilation{
 		if (scanner.getSymbCour().getToken()==Tokens.ID_TOKEN) {
-			Affec();
+			this.Affec();
 		}
 		else if (scanner.getSymbCour().getToken()==Tokens.IF_TOKEN) {
 			Si();
@@ -189,7 +191,7 @@ public class Parser {
 			Ecrire();
 		}
 		else if (scanner.getSymbCour().getToken()==Tokens.READ_TOKEN) {
-			Lire();
+			this.Lire();
 		}
 		else if(scanner.getSymbCour().getToken()==Tokens.BEGIN_TOKEN) {
 			insts();
@@ -213,10 +215,10 @@ public class Parser {
 	public void Block() throws IOException,ErreurCompilation{
 		
 		if(scanner.getSymbCour().getToken()==Tokens.CONST_TOKEN) {
-			consts();
+			this.consts();
 		}
 		if(scanner.getSymbCour().getToken()==Tokens.VAR_TOKEN) {
-			vars();
+			this.vars();
 		}
 		
 		insts();
